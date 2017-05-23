@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,8 +80,8 @@ public class MoviesRecommender {
 			double[][] tmp2dArr = new double[students][z];
 			
 			//printing log likelihood
-			System.out.print("Iteration " + counter + " | ");
-			System.out.println(logLikelihood(probZ, rGvnZ, matrixRatings));
+			//System.out.print("Iteration " + counter + " | ");
+			//System.out.println(logLikelihood(probZ, rGvnZ, matrixRatings));
 			
 			//calculating E-step
 			for(int i=0; i < students; i++) {
@@ -97,8 +99,55 @@ public class MoviesRecommender {
 			//M-step
 			//Updating P(Z=i)
 			probZ = updatePzi(probStudentsZ);	
-			rGvnZ = updateRgvZ(probStudentsZ, rGvnZ, matrixRatings);
+			rGvnZ = updateRgvZ(probStudentsZ, rGvnZ, matrixRatings);			
 		}	 
+		
+		//--------PART F-------//
+		ArrayList<Integer> indexes = new ArrayList<>();
+		int myRow = 113;
+		int size = 0;			
+		
+		//counting movies I haven't seen
+		for(int i=0; i < movies; i++) {
+			if(matrixRatings.getElement(myRow, i).equals("?")){
+				size++;
+				indexes.add(i);
+			}
+		}
+
+		//Initializing arrays to keep track of movies
+		double[] ratings = new double[size];
+		String[] unseenMovies = new String[size];
+		
+		//Calculating my ratings
+		for(int i=0; i < indexes.size(); i++) {
+			int mov = indexes.get(i);
+			double prob = 0;
+			double tmp = 0;
+			
+			for(int j=0; j < z; j++) {
+				tmp = probStudentsZ[myRow][j] * rGvnZ[mov][j];
+				prob += tmp;
+			}
+			
+			ratings[i] = prob;
+			unseenMovies[i] = movieTitles[mov];
+		}
+		
+		//mapping ratings and movie titles
+		Map<Double, String> myRecommendations = new HashMap<>();
+		for(int i=0; i < ratings.length; i++) {
+			myRecommendations.put(ratings[i], unseenMovies[i]);
+		}
+		
+		//sorting ratings
+		Arrays.sort(ratings);
+		
+		//printing movies
+		for(int i=ratings.length - 1; i >= 0; i--) {
+			System.out.print("Movie Title: " + myRecommendations.get(ratings[i]));
+			System.out.println(" | Rating: " + new DecimalFormat("#0.00000").format(ratings[i]));
+		}
 	}
 	
 	

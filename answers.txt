@@ -1,3 +1,8 @@
+PROBLEM 5.3
+=============
+
+
+
 PART A - Movies from least popular to most popular
 =======
 
@@ -51,3 +56,175 @@ Interstellar
 The_Dark_Knight_Rises
 Shutter_Island
 Inception
+
+
+
+PART E
+=======
+Yes, it does become less negative
+
+Iteration 0 | -23.437518174545367
+Iteration 1 | -13.808152590221496
+Iteration 2 | -12.246043725688336
+Iteration 3 | -11.626334167891276
+Iteration 4 | -11.325831292141562
+Iteration 5 | -11.169072291217507
+Iteration 6 | -11.072275672814381
+Iteration 7 | -11.005730685292663
+Iteration 8 | -10.956510072762828
+Iteration 9 | -10.923253151658296
+Iteration 10 | -10.901619859815993
+Iteration 11 | -10.886832435834448
+Iteration 12 | -10.876333897744821
+Iteration 13 | -10.868652671392443
+Iteration 14 | -10.862797638188244
+Iteration 15 | -10.858094135644155
+Iteration 16 | -10.854091731859901
+Iteration 17 | -10.850467251202947
+Iteration 18 | -10.846964281248548
+Iteration 19 | -10.843377418154184
+Iteration 20 | -10.839532143179147
+Iteration 21 | -10.835259422977979
+Iteration 22 | -10.83058184771802
+Iteration 23 | -10.826194350108333
+Iteration 24 | -10.822800101708541
+Iteration 25 | -10.820200701095265
+Iteration 26 | -10.817929600891912
+Iteration 27 | -10.81563835566657
+Iteration 28 | -10.81305431345014
+Iteration 29 | -10.809730504506373
+Iteration 30 | -10.805175324303477
+Iteration 31 | -10.800111444144054
+Iteration 32 | -10.795805712807727
+Iteration 33 | -10.792210109023852
+Iteration 34 | -10.788797355316262
+Iteration 35 | -10.7853870682614
+Iteration 36 | -10.782342552415246
+Iteration 37 | -10.77987105561698
+Iteration 38 | -10.777779013149344
+Iteration 39 | -10.77581986331019
+Iteration 40 | -10.77380749641506
+Iteration 41 | -10.771634933080898
+Iteration 42 | -10.769288036568424
+Iteration 43 | -10.766828666025557
+Iteration 44 | -10.764412682513205
+Iteration 45 | -10.762193035860484
+Iteration 46 | -10.760214702135329
+Iteration 47 | -10.7585350395712
+Iteration 48 | -10.75721271203765
+Iteration 49 | -10.756206985838629
+Iteration 50 | -10.755426425278808
+Iteration 51 | -10.754796965871614
+Iteration 52 | -10.754272887027629
+Iteration 53 | -10.753825974488544
+Iteration 54 | -10.753433826164331
+Iteration 55 | -10.753072233179646
+Iteration 56 | -10.752711642950077
+Iteration 57 | -10.752315669671383
+Iteration 58 | -10.75184177895518
+Iteration 59 | -10.751249326701231
+Iteration 60 | -10.750513680728753
+Iteration 61 | -10.749597077204632
+Iteration 62 | -10.748284849154729
+Iteration 63 | -10.74602068462383
+Iteration 64 | -10.742599797081384
+Iteration 65 | -10.739114677639042
+Iteration 66 | -10.736162473437311
+Iteration 67 | -10.733522379594863
+Iteration 68 | -10.730827952595149
+Iteration 69 | -10.72724411731137
+Iteration 70 | -10.721447263514857
+Iteration 71 | -10.714737685208119
+Iteration 72 | -10.708915880814509
+Iteration 73 | -10.702429630366728
+Iteration 74 | -10.69482388613199
+Iteration 75 | -10.687762751889974
+Iteration 76 | -10.681073394898007
+Iteration 77 | -10.671218972671067
+Iteration 78 | -10.658287300082268
+Iteration 79 | -10.64899719021499
+Iteration 80 | -10.641642656583898
+Iteration 81 | -10.635256007931146
+Iteration 82 | -10.63033677384217
+Iteration 83 | -10.627194608398616
+Iteration 84 | -10.62515682473554
+Iteration 85 | -10.623708042547127
+Iteration 86 | -10.622593606000104
+Iteration 87 | -10.621685507066209
+Iteration 88 | -10.620910623288829
+Iteration 89 | -10.620221280169115
+Iteration 90 | -10.619586419732991
+Iteration 91 | -10.618991628455342
+Iteration 92 | -10.618439202377555
+Iteration 93 | -10.61794185289419
+Iteration 94 | -10.617511172705411
+Iteration 95 | -10.617149319427973
+Iteration 96 | -10.616849036799248
+Iteration 97 | -10.61659863094724
+Iteration 98 | -10.616386629368888
+Iteration 99 | -10.616204128756404
+Iteration 100 | -10.616045231933665
+Iteration 101 | -10.61590641963279
+Iteration 102 | -10.615785503988459
+Iteration 103 | -10.61568064084494
+Iteration 104 | -10.615589715423503
+Iteration 105 | -10.615510176778622
+Iteration 106 | -10.615439178101056
+Iteration 107 | -10.61537380880103
+Iteration 108 | -10.615311271695827
+Iteration 109 | -10.61524896425458
+Iteration 110 | -10.615184493485577
+Iteration 111 | -10.615115679249291
+Iteration 112 | -10.615040599436638
+Iteration 113 | -10.61495771700486
+Iteration 114 | -10.614866103168804
+Iteration 115 | -10.614765725204323
+Iteration 116 | -10.614657702774489
+Iteration 117 | -10.614544384033598
+Iteration 118 | -10.614429110292257
+Iteration 119 | -10.614315661644076
+Iteration 120 | -10.614207550496742
+Iteration 121 | -10.614107423600586
+Iteration 122 | -10.614016765014403
+Iteration 123 | -10.613935924175994
+Iteration 124 | -10.613864356901784
+Iteration 125 | -10.61380093213443
+Iteration 126 | -10.613744198598793
+Iteration 127 | -10.613692565487494
+Iteration 128 | -10.613644393851198
+
+
+PART F
+=======
+
+Unseen Movies:
+
+Movie Title: The_Hateful_Eight | Rating: 0.99595
+Movie Title: Harry_Potter_and_the_Deathly_Hallows:_Part_2 | Rating: 0.99331
+Movie Title: Harry_Potter_and_the_Deathly_Hallows:_Part_1 | Rating: 0.99247
+Movie Title: Toy_Story_3 | Rating: 0.99163
+Movie Title: Interstellar | Rating: 0.98398
+Movie Title: Captain_America:_The_First_Avenger | Rating: 0.95471
+Movie Title: The_Help | Rating: 0.93954
+Movie Title: The_Martian | Rating: 0.92689
+Movie Title: Thor | Rating: 0.92592
+Movie Title: Black_Swan | Rating: 0.91013
+Movie Title: Les_Miserables | Rating: 0.87681
+Movie Title: Gone_Girl | Rating: 0.86949
+Movie Title: Drive | Rating: 0.86644
+Movie Title: Ex_Machina | Rating: 0.86516
+Movie Title: 12_Years_a_Slave | Rating: 0.86243
+Movie Title: American_Hustle | Rating: 0.86119
+Movie Title: Her | Rating: 0.85611
+Movie Title: Frozen | Rating: 0.84411
+Movie Title: Midnight_in_Paris | Rating: 0.84356
+Movie Title: Bridemaids | Rating: 0.82112
+Movie Title: The_Great_Gatsby | Rating: 0.82081
+Movie Title: The_Perks_of_Being_a_Wallflower | Rating: 0.81594
+Movie Title: Pitch_Perfect | Rating: 0.80925
+Movie Title: Prometheus | Rating: 0.70043
+Movie Title: Magic_Mike | Rating: 0.51659
+Movie Title: The_Last_Airbender | Rating: 0.26577
+
+Yes, it is actually very accurate!
+
