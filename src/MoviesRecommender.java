@@ -14,6 +14,7 @@ public class MoviesRecommender {
 	
 	private static final int movies = 50;
 	private static final int students = 258;
+	private static final int z = 4;
 	
 	
 	/**
@@ -22,6 +23,9 @@ public class MoviesRecommender {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		//-------------Question A------------//
+		
 		//Loading proper data for part "A" of this problem
 		Matrix matrixRatings = new Matrix(students, movies, "hw5_movieRatings.txt");
 		String[] movieTitles = load(movies, "hw5_movieTitles.txt");
@@ -48,7 +52,176 @@ public class MoviesRecommender {
 			System.out.println(popularity.get(ratios[i]));
 		}
 		
-	 
+		
+		//--------Question E----------//
+		RgivenZ probRgvZ = new RgivenZ();
+		String[] strProbZ = load(z, "hw5_probZ_init.txt");
+		double[][] probStudentsZ = new double[students][z];
+		double[][] rGvnZ = new double[movies][z];
+		double[] probZ = new double[z];
+		
+		//getting probabilities of P(Z=i) for all students
+		for(int i=0; i < z; i++) {
+			probZ[i] = Double.parseDouble(strProbZ[i]);
+		}		
+		//getting P(R=1 | Z=i)
+		for(int i=0; i < movies; i++) {
+			for(int j=0; j < z; j++) {
+				rGvnZ[i][j] = probRgvZ.getProb(i, j);
+			}
+		}
+		
+		
+		
+		//--------EM algorithm---------//
+		for(int counter=0; counter < 129; counter++) {
+			double[][] tmp2dArr = new double[students][z];
+			
+			//printing log likelihood
+			System.out.print("Iteration " + counter + " | ");
+			System.out.println(logLikelihood(probZ, rGvnZ, matrixRatings));
+			
+			//calculating E-step
+			for(int i=0; i < students; i++) {
+				double denom = denominator(probZ, rGvnZ, i, matrixRatings);
+				for(int j=0; j < z; j++) {
+					double num = numerator(j, probZ[j], rGvnZ, i, matrixRatings);
+					tmp2dArr[i][j] = num / denom;
+					//System.out.println("denom = " + denom + " --- num = " + num);
+				}
+			}
+			
+			//updating probRgvZ
+			probStudentsZ = tmp2dArr;
+			
+			//M-step
+			//Updating P(Z=i)
+			probZ = updatePzi(probStudentsZ);	
+			rGvnZ = updateRgvZ(probStudentsZ, rGvnZ, matrixRatings);
+		}	 
+	}
+	
+	
+	/**
+	 * Updates P(Rj=1 | Z = i)
+	 * 
+	 * @param pZi
+	 * @param rGvnZ
+	 * @param ratings
+	 * @return
+	 */
+	private static double[][] updateRgvZ(double[][] pZi, double[][] rGvnZ, Matrix ratings) {
+		
+		double[][] updRgvZ = new double[movies][z];
+		double numFirstSum = 0;
+		double numSecSum = 0;
+		double denom = 0;
+		
+		//getting numerator
+		for(int j=0; j < movies; j++) {
+			for(int i=0; i < z; i++) {
+				for(int t=0; t < students; t++) {
+					if(ratings.getElement(t, j).equals("1")) numFirstSum += pZi[t][i];
+					else if(ratings.getElement(t, j).equals("?")) numSecSum += (rGvnZ[j][i] * pZi[t][i]);
+					denom += pZi[t][i];
+				}
+				
+				//updating values
+				updRgvZ[j][i] = (numFirstSum + numSecSum) / denom;
+				numFirstSum = 0;
+				numSecSum = 0;
+				denom = 0;
+			}
+		}
+		
+		return updRgvZ;
+	}
+	
+	/**
+	 * Updates the P(Z=i) as root node
+	 * 
+	 * @param pZi
+	 * @return returns updated array of P(Z=i)
+	 */
+	private static double[] updatePzi(double[][] pZi) {
+		double[] updatedPzi = new double[z];
+		double sumZi = 0;
+		
+		for(int zi=0; zi < z; zi++) {
+			for(int t=0; t < students; t++) {
+				sumZi += pZi[t][zi];
+			}
+			
+			updatedPzi[zi] = (1.0 / students)*sumZi;
+			sumZi = 0;
+		}
+		return updatedPzi;
+	}
+	
+	/**
+	 * Calculates denominator for Pi
+	 * 
+	 * @param probZ
+	 * @param probRgvnZ
+	 * @return
+	 */
+	private static double denominator(double[] probZ, double[][] probRgvnZ, int t, Matrix ratings) {
+		double denom = 0;
+		
+		for(int zi=0; zi < probZ.length; zi++) {
+			double tmp = 1;
+			for(int row=0; row < probRgvnZ.length; row++) {
+				if(ratings.getElement(t, row).equals("1") )  
+					tmp *= probRgvnZ[row][zi];
+				else if( ratings.getElement(t, row).equals("0"))
+					tmp *= (1.0 - probRgvnZ[row][zi]);
+			}
+			tmp *= probZ[zi];
+			denom += tmp;
+			//System.out.println(denom + " -- " + zi);
+		}
+		
+		return denom;	
+	}
+	
+	/**
+	 * Returns numerator for Pi
+	 * 
+	 * @param col
+	 * @param zi
+	 * @param matrix
+	 * @return
+	 */
+	private static double numerator(double col, double zi, double[][] probRgvZ, int t, Matrix ratings) {
+		double num = 1;
+		
+		for(int row=0; row < probRgvZ.length; row++) {
+			if(ratings.getElement(t, row).equals("1"))
+				num *= probRgvZ[row][(int)col];
+			else if(ratings.getElement(t, row).equals("0"))
+				num *= (1 - probRgvZ[row][(int)col]);
+		}
+		
+		return (num * zi);		
+	}
+	
+	/**
+	 * Computes the log likelihood
+	 * 
+	 * @param probZ
+	 * @param rGvnZ
+	 * @param ratings
+	 * @return
+	 */
+	private static double logLikelihood(double[] probZ, double[][] rGvnZ, Matrix ratings) {
+		double logLk = 0;
+		
+		for(int t=0; t < students; t++) {
+			double tmp = denominator(probZ, rGvnZ, t, ratings);
+			logLk += Math.log(tmp);
+		}
+		
+		return ( (1.0/students) * logLk);
 	}
 	
 	/**
